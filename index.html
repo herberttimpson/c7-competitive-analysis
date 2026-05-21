@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Circle 7 — Competitive Pricing Analysis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+  :root {
+    --gold: #C4952A;
+    --copper: #A0602A;
+    --charcoal: #525050;
+    --dark: #3A3232;
+    --cream: #F8F2E6;
+    --light: #FAF6EF;
+    --muted: rgba(82,80,80,0.5);
+    --border: #E5DDD0;
+    --green: #2E7D32;
+    --red: #B71C1C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Barlow Condensed', sans-serif;
+    background: var(--light);
+    color: var(--charcoal);
+    padding: 40px 48px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .report-header {
+    border-bottom: 2px solid var(--charcoal);
+    padding-bottom: 20px; margin-bottom: 28px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .report-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--charcoal); line-height: 1; }
+  .report-header .sub { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+  .report-meta { text-align: right; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); line-height: 1.9; }
+
+  /* SCOPE BAR */
+  .scope-bar {
+    background: var(--charcoal); color: rgba(248,242,230,0.8);
+    padding: 11px 20px; border-radius: 3px; font-size: 11px; letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+  .scope-bar strong { color: var(--gold); }
+
+  /* METHODOLOGY */
+  .methodology {
+    background: var(--dark); color: var(--cream);
+    border-radius: 4px; padding: 20px 24px; margin-bottom: 32px;
+  }
+  .methodology h3 { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .method-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .method-step { background: rgba(255,255,255,0.06); border: 1px solid rgba(196,149,42,0.18); border-radius: 3px; padding: 9px 10px; }
+  .method-step .n { font-size: 16px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 2px; }
+  .method-step .lbl { font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(248,242,230,0.5); }
+  .method-step .val { font-size: 10px; color: rgba(248,242,230,0.8); margin-top: 2px; line-height: 1.3; }
+
+  /* ═══ MAIN MATRIX TABLE ═══ */
+  .matrix-wrap { overflow-x: auto; margin-bottom: 32px; }
+
+  .matrix {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    table-layout: fixed;
+  }
+
+  /* HEADER ROW — producer names */
+  .matrix thead tr.col-heads th {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 11px 8px 9px;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(255,255,255,0.25);
+    white-space: nowrap;
+    line-height: 1.3;
+  }
+  .matrix thead tr.col-heads th.th-breed {
+    text-align: left;
+    background: #2C2828;
+    font-size: 10px;
+    width: 140px;
+    min-width: 140px;
+    padding-left: 14px;
+  }
+  .matrix thead tr.col-heads th.th-c7 {
+    background: #3A2A10;
+    color: var(--gold);
+  }
+  .matrix thead tr.col-heads th.th-avg {
+    background: #4A3A20;
+    color: rgba(196,149,42,0.9);
+  }
+  .matrix thead tr.col-heads th.th-vs {
+    background: #2C2828;
+    width: 72px;
+    min-width: 72px;
+  }
+
+  /* SPECIALTY SUBROW */
+  .matrix thead tr.col-subs th {
+    background: #3E3C3A;
+    color: rgba(248,242,230,0.65);
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 8px 5px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.18);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .matrix thead tr.col-subs th.th-breed { text-align: left; padding-left: 14px; background: #2C2828; }
+
+  /* BREED CATEGORY HEADER ROW */
+  .row-cat td {
+    background: var(--charcoal);
+    color: var(--cream);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 8px 5px;
+    font-weight: 700;
+    border-bottom: none;
+  }
+  .row-cat td:first-child { padding-left: 14px; }
+
+  /* DATA CELLS */
+  .matrix tbody tr.data-row td {
+    padding: 9px 8px;
+    text-align: center;
+    border-bottom: 1px solid #CCC4B8;
+    border-right: 1px solid #C0B8AE;
+    font-size: 12px;
+    color: #222;
+    vertical-align: middle;
+    line-height: 1.3;
+  }
+  .matrix tbody tr.data-row td:first-child {
+    text-align: left;
+    font-weight: 700;
+    font-size: 13px;
+    padding-left: 14px;
+    background: #FAF6EF;
+    border-right: 2px solid #A09080;
+    color: #1A1A1A;
+  }
+  .matrix tbody tr.data-row:nth-child(even) td { background: rgba(220,210,196,0.28); }
+  .matrix tbody tr.data-row:nth-child(even) td:first-child { background: #F0E8DA; }
+
+  /* NULL CELL */
+  .null { color: #BBAD9E; font-size: 11px; }
+
+  /* MARKET AVG CELL */
+  td.td-avg {
+    background: rgba(196,149,42,0.06) !important;
+    font-weight: 700;
+    color: var(--copper) !important;
+    border-left: 1px solid rgba(196,149,42,0.3);
+    border-right: 1px solid rgba(196,149,42,0.3);
+  }
+
+  /* C7 CELLS */
+  td.td-c7 {
+    background: var(--dark) !important;
+    color: var(--gold) !important;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  td.td-c7-half {
+    background: #2C2220 !important;
+    color: rgba(196,149,42,0.85) !important;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* VS AVG CELL */
+  td.td-vs {
+    font-weight: 700;
+    font-size: 11px;
+    border-left: 2px solid var(--border);
+  }
+  td.td-vs.above { color: var(--copper); background: rgba(160,96,42,0.06) !important; }
+  td.td-vs.below { color: var(--red); background: rgba(183,28,28,0.06) !important; }
+
+  /* PRODUCER LABEL IN CELL */
+  .prod-label { font-size: 8.5px; color: #6A5E54; letter-spacing: 0.04em; display: block; margin-top: 1px; font-weight: 400; }
+
+  /* RANGE PRICE */
+  .range { font-size: 10.5px; }
+
+  /* FLAG */
+  .flag-badge {
+    display: inline-block; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(183,28,28,0.12); color: var(--red);
+    padding: 1px 6px; border-radius: 2px; margin-top: 2px;
+  }
+
+  /* ═══ ECONOMICS TABLE ═══ */
+  .econ-section { margin-top: 12px; margin-bottom: 32px; }
+  .econ-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: var(--charcoal); margin-bottom: 14px;
+  }
+  .econ-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .econ-table thead th {
+    background: var(--charcoal); color: var(--cream);
+    padding: 8px 12px; text-align: right; font-size: 8.5px;
+    letter-spacing: 0.15em; text-transform: uppercase; white-space: nowrap;
+  }
+  .econ-table thead th:first-child { text-align: left; }
+  .econ-table tbody td {
+    padding: 8px 12px; text-align: right;
+    border-bottom: 1px solid var(--border); color: #444;
+  }
+  .econ-table tbody td:first-child { text-align: left; font-weight: 700; color: var(--charcoal); }
+  .econ-table tbody tr:nth-child(even) td { background: rgba(248,242,230,0.45); }
+  .econ-table .td-green { color: var(--green); font-weight: 700; }
+  .econ-table .td-red { color: var(--red); font-weight: 700; }
+  .econ-table .td-gold { color: var(--gold); font-weight: 700; }
+
+  /* FINDINGS */
+  .findings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .findings-box { padding: 18px 20px; border-radius: 4px; }
+  .findings-box h4 { font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 10px; }
+  .findings-box ul { font-size: 11.5px; line-height: 1.95; padding-left: 14px; }
+
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="report-header">
+  <div>
+    <h1>Circle 7 — Competitive Pricing Analysis</h1>
+    <div class="sub">Whole &amp; Half Animal Sales · Producers as Columns · Breeds as Rows · All prices $/lb finished, take-home, processing included</div>
+  </div>
+  <div class="report-meta">
+    May 2026 &nbsp;·&nbsp; Colorado City, AZ 86021<br>
+    Processor: CMM<br>
+    Platform: CMS
+  </div>
+</div>
+
+<!-- SCOPE -->
+<div class="scope-bar">
+  <strong>Scope:</strong> Whole &amp; half animal sellers only — retail cut brands (Snake River Farms, etc.) excluded. &nbsp;|&nbsp;
+  <strong>Basis:</strong> All prices converted to $/lb finished take-home, processing included. &nbsp;|&nbsp;
+  <strong>HW conversion:</strong> (Competitor HW $/lb × C7 HCW lbs + processing cost) ÷ C7 take-home lbs.
+</div>
+
+<!-- METHODOLOGY -->
+<div class="methodology">
+  <h3>Yield Assumptions (locked) — Applied Uniformly to All HW Competitor Conversions</h3>
+  <div class="method-steps">
+    <div class="method-step">
+      <div class="n">Beef</div>
+      <div class="lbl">Dressing · Cut Yield</div>
+      <div class="val">60% live→HCW<br>60% HCW→take-home</div>
+    </div>
+    <div class="method-step">
+      <div class="n">Pork</div>
+      <div class="lbl">Dressing · Cut Yield</div>
+      <div class="val">70% live→HCW<br>70% HCW→take-home</div>
+    </div>
+    <div class="method-step">
+      <div class="n">Lamb</div>
+      <div class="lbl">Dressing · Cut Yield</div>
+      <div class="val">60% live→HCW<br>55% HCW→take-home</div>
+    </div>
+    <div class="method-step">
+      <div class="n">Processing</div>
+      <div class="lbl">CMM</div>
+      <div class="val">Beef $150 kill + $50 USDA + $1.10/lb HCW<br>Pork $85 kill + $25 USDA + $1.10/lb HCW<br>Lamb $70 kill + $1.10/lb HCW</div>
+    </div>
+    <div class="method-step">
+      <div class="n">HW→Fin</div>
+      <div class="lbl">Conversion Formula</div>
+      <div class="val">(HW price × HCW lbs + proc cost) ÷ take-home lbs<br>= all-in finished $/lb</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- MAIN MATRIX TABLE -->
+<!-- ═══════════════════════════════════════ -->
+<div class="matrix-wrap">
+<table class="matrix">
+  <thead>
+    <!-- ROW 1: Producer names -->
+    <tr class="col-heads">
+      <th class="th-breed">Breed / Product</th>
+      <th>Budget<br>Floor</th>
+      <th>Wood Farms</th>
+      <th>Chappell Hill<br>Wagyu</th>
+      <th>Mosida Market<br>(UT)</th>
+      <th>Wilders</th>
+      <th>Plum Creek<br>Wagyu</th>
+      <th>Laurel Ridge<br>Farm</th>
+      <th>New Roots<br>Farm</th>
+
+      <th>Purple Sage<br>Farms</th>
+      <th>Lucky Lane<br>Farm</th>
+      <th class="th-avg">Mkt Avg<br>(Whole/Half)</th>
+      <th class="th-c7">◆ C7<br>Whole</th>
+      <th class="th-c7">◆ C7<br>Half</th>
+      <th class="th-vs">C7 vs<br>Avg</th>
+    </tr>
+    <!-- ROW 2: Specialty notes -->
+    <tr class="col-subs">
+      <th class="th-breed">All prices: $/lb finished, take-home, all-in</th>
+      <th>Grain-fin / basic breeds</th>
+      <th>Pasture beef<br>HW incl. proc</th>
+      <th>F1 Wagyu cross<br>HW + proc sep.</th>
+      <th>Wagyu-Angus<br>HW + proc sep.</th>
+      <th>100% Fullblood<br>Finished</th>
+      <th>F1 + Fullblood<br>Finished</th>
+      <th>Kurobuta<br>HW incl. proc</th>
+      <th>Kurobuta/Berk.<br>HW + proc sep.</th>
+      <th>Lamb (whole)<br>Finished</th>
+      <th>Lamb (grass-fin)<br>HW + proc sep.</th>
+      <th></th>
+      <th>Aug 2026 availability</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- ══ BEEF CATEGORY ══ -->
+    <tr class="row-cat">
+      <td colspan="15">Beef</td>
+    </tr>
+
+    <!-- Black Angus -->
+    <tr class="data-row">
+      <td>Black Angus<br><span style="font-size:10px; font-weight:400; color:var(--muted);">1,450 lb live · 522 lb take-home</span></td>
+      <td>$8.00<span class="prod-label">Grain-fin avg</span></td>
+      <td>$10.23<span class="prod-label">$6.15 HW incl.</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td class="td-avg">$10.00</td>
+      <td class="td-c7">$12.00<span class="prod-label">522 lbs · $6,264</span></td>
+      <td class="td-c7-half">$13.00<span class="prod-label">261 lbs · $3,393</span></td>
+      <td class="td-vs above">+20%</td>
+    </tr>
+
+    <!-- ══ WAGYU CATEGORY ══ -->
+    <tr class="row-cat">
+      <td colspan="15">Wagyu</td>
+    </tr>
+
+    <!-- F1 Cross -->
+    <tr class="data-row">
+      <td>F1 Wagyu Cross<br><span style="font-size:10px; font-weight:400; color:var(--muted);">1,400 lb live · 504 lb take-home</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="range">$14.73–16.41</span><span class="prod-label">$7.50–8.50 HW</span></td>
+      <td>$11.40<span class="prod-label">$5.50 HW</span></td>
+      <td><span class="null">—</span></td>
+      <td>$17.50<span class="prod-label">Finished, all-in</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td class="td-avg">$14.00</td>
+      <td class="td-c7">$15.00<span class="prod-label">504 lbs · $7,560</span></td>
+      <td class="td-c7-half">$16.00<span class="prod-label">252 lbs · $4,032</span></td>
+      <td class="td-vs above">+7%</td>
+    </tr>
+
+    <!-- Full Blood Wagyu -->
+    <tr class="data-row">
+      <td>Full Blood Wagyu<br><span style="font-size:10px; font-weight:400; color:var(--muted);">1,400 lb live · 504 lb take-home</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td>$15.00<span class="prod-label">Finished, all-in</span></td>
+      <td>$20.00<span class="prod-label">Fullblood finished</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td class="td-avg">$18.00</td>
+      <td class="td-c7">$20.00<span class="prod-label">504 lbs · $10,080</span></td>
+      <td class="td-c7-half">$22.00<span class="prod-label">252 lbs · $5,544</span></td>
+      <td class="td-vs above">+11%</td>
+    </tr>
+
+    <!-- ══ PORK CATEGORY ══ -->
+    <tr class="row-cat">
+      <td colspan="15">Pork</td>
+    </tr>
+
+    <!-- Kurobuta -->
+    <tr class="data-row">
+      <td>Kurobuta Pork<br><span style="font-size:10px; font-weight:400; color:var(--muted);">100% Full Blood Berkshire · 340 lb live · 167 lb take-home</span></td>
+      <td>$7.13<span class="prod-label">Home Farm $3.75 HW incl.</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td>$7.13<span class="prod-label">$5.00 HW incl. proc</span></td>
+      <td>$10.83<span class="prod-label">$6.00 HW + proc sep.</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td class="td-avg">$9.00</td>
+      <td class="td-c7">$10.00<span class="prod-label">167 lbs · $1,670</span></td>
+      <td class="td-c7-half">$11.00<span class="prod-label">84 lbs · $918</span></td>
+      <td class="td-vs above">+11%</td>
+    </tr>
+
+    <!-- Heritage Pork (GOS Cross) -->
+    <tr class="data-row">
+      <td>Heritage Pork (GOS×Hamp.×York.)<br><span style="font-size:10px; font-weight:400; color:var(--muted);">Gloucester Old Spot Cross · 275 lb live · 135 lb take-home</span></td>
+      <td>$8.50<span class="prod-label">Heritage floor est.</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td>$9.65<span class="prod-label">River Bard $6.75 HW incl.</span></td>
+      <td>$10.01<span class="prod-label">Stellar Mkt $7.00 HW incl.</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td class="td-avg">$9.80</td>
+      <td class="td-c7">$9.00<span class="prod-label">135 lbs · $1,215</span></td>
+      <td class="td-c7-half">$10.00<span class="prod-label">68 lbs · $675</span></td>
+      <td class="td-vs below">−8%</td>
+    </tr>
+
+    <!-- ══ LAMB CATEGORY ══ -->
+    <tr class="row-cat">
+      <td colspan="15">Lamb</td>
+    </tr>
+
+    <!-- Lamb -->
+    <tr class="data-row">
+      <td>Lamb (Ram. × Hampshire)<br><span style="font-size:10px; font-weight:400; color:var(--muted);">140 lb live · 46 lb take-home</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td><span class="null">—</span></td>
+      <td>$12.00<span class="prod-label">30–40 lb whole</span></td>
+      <td>$17.96<span class="prod-label">$8.00 HW + proc sep.</span></td>
+      <td class="td-avg">$15.50</td>
+      <td class="td-c7">$15.00<span class="prod-label">46 lbs · $690</span></td>
+      <td class="td-c7-half">$16.00<span class="prod-label">23 lbs · $368</span></td>
+      <td class="td-vs above">−3%</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ECONOMICS REFERENCE TABLE -->
+<!-- ═══════════════════════════════════════ -->
+<div class="econ-section">
+  <h3>Economics Reference — C7 Implied On-Hoof Value vs Auction</h3>
+  <table class="econ-table">
+    <thead>
+      <tr>
+        <th style="text-align:left;">Breed</th>
+        <th>Live Wt</th>
+        <th>HCW</th>
+        <th>Take-Home</th>
+        <th>Processing $</th>
+        <th>Proc $/lb</th>
+        <th>C7 Whole Rev.</th>
+        <th>C7 Half Rev.</th>
+        <th>Implied On-Hoof (W)</th>
+        <th>Auction $/lb</th>
+        <th>vs Auction (Whole)</th>
+        <th>vs Auction (Half)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Black Angus</td>
+        <td>1,450</td>
+        <td>870</td>
+        <td>522</td>
+        <td>$1,157</td>
+        <td>$2.22</td>
+        <td>$6,264</td>
+        <td>$3,393</td>
+        <td class="td-gold">$3.52</td>
+        <td>$2.50</td>
+        <td class="td-green">+$1.02 (+41%)</td>
+        <td class="td-green">+$1.38 (+55%)</td>
+      </tr>
+      <tr>
+        <td>F1 Wagyu Cross</td>
+        <td>1,400</td>
+        <td>840</td>
+        <td>504</td>
+        <td>$1,124</td>
+        <td>$2.23</td>
+        <td>$7,560</td>
+        <td>$4,032</td>
+        <td class="td-gold">$4.60</td>
+        <td>$2.88</td>
+        <td class="td-green">+$1.72 (+60%)</td>
+        <td class="td-green">+$2.08 (+72%)</td>
+      </tr>
+      <tr>
+        <td>Full Blood Wagyu</td>
+        <td>1,400</td>
+        <td>840</td>
+        <td>504</td>
+        <td>$1,124</td>
+        <td>$2.23</td>
+        <td>$10,080</td>
+        <td>$5,544</td>
+        <td class="td-gold">$6.40</td>
+        <td>$4.50</td>
+        <td class="td-green">+$1.90 (+42%)</td>
+        <td class="td-green">+$2.62 (+58%)</td>
+      </tr>
+      <tr>
+        <td>Kurobuta Pork</td>
+        <td>340</td>
+        <td>238</td>
+        <td>167</td>
+        <td>$372</td>
+        <td>$2.23</td>
+        <td>$1,670</td>
+        <td>$918</td>
+        <td class="td-gold">$3.82</td>
+        <td>$1.38</td>
+        <td class="td-green">+$2.44 (+177%)</td>
+        <td class="td-green">+$2.93 (+212%)</td>
+      </tr>
+      <tr>
+        <td>Heritage Pork (GOS Cross)</td>
+        <td>275</td>
+        <td>193</td>
+        <td>135</td>
+        <td>$322</td>
+        <td>$2.39</td>
+        <td>$1,215</td>
+        <td>$675</td>
+        <td class="td-gold">$3.25</td>
+        <td>$1.38</td>
+        <td class="td-green">+$1.87 (+135%)</td>
+        <td class="td-green">+$2.36 (+171%)</td>
+      </tr>
+      <tr>
+        <td>Lamb (Ram. × Hampshire)</td>
+        <td>140</td>
+        <td>84</td>
+        <td>46</td>
+        <td>$162</td>
+        <td>$3.52</td>
+        <td>$690</td>
+        <td>$368</td>
+        <td class="td-gold">$3.77</td>
+        <td>$2.92</td>
+        <td class="td-green">+$0.85 (+29%)</td>
+        <td class="td-green">+$1.18 (+40%)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MARGIN ANALYSIS -->
+<div class="econ-section">
+  <h3>Profit Margin Analysis — Per Animal</h3>
+  <p style="font-size:11px; color:var(--muted); margin-bottom:16px; letter-spacing:0.04em;">
+    COGS = cost per lb of finished take-home weight (animal + processing, all-in). Kurobuta: $720/head (C7 Livestock) + $372 proc ÷ 167 lbs = $6.54/lb · Supplier: Scott Miller · 100% Full Blood Berkshire · $650 at source. Heritage Pork: $470/head (C7 Livestock) + $322 proc ÷ 135 lbs = $5.87/lb · GOS × Hampshire × Yorkshire cross. Half revenue = both halves sold from one animal.
+  </p>
+  <table class="econ-table">
+    <thead>
+      <tr>
+        <th style="text-align:left;">Product</th>
+        <th>Take-Home Lbs</th>
+        <th>COGS $/lb</th>
+        <th>Total COGS</th>
+        <th>C7 Whole $/lb</th>
+        <th>Whole Revenue</th>
+        <th>Gross Profit (W)</th>
+        <th>Margin % (W)</th>
+        <th>C7 Half $/lb</th>
+        <th>Half Revenue</th>
+        <th>Gross Profit (H)</th>
+        <th>Margin % (H)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Black Angus</td>
+        <td>522</td>
+        <td>$10.00</td>
+        <td>$5,220</td>
+        <td>$12.00</td>
+        <td>$6,264</td>
+        <td class="td-green">$1,044</td>
+        <td>16.7%</td>
+        <td>$13.00</td>
+        <td>$6,786</td>
+        <td class="td-green">$1,566</td>
+        <td>23.1%</td>
+      </tr>
+      <tr>
+        <td>F1 Wagyu Cross</td>
+        <td>504</td>
+        <td>$12.00</td>
+        <td>$6,048</td>
+        <td>$15.00</td>
+        <td>$7,560</td>
+        <td class="td-green">$1,512</td>
+        <td>20.0%</td>
+        <td>$16.00</td>
+        <td>$8,064</td>
+        <td class="td-green">$2,016</td>
+        <td>25.0%</td>
+      </tr>
+      <tr>
+        <td>Full Blood Wagyu</td>
+        <td>504</td>
+        <td>$14.00</td>
+        <td>$7,056</td>
+        <td>$20.00</td>
+        <td>$10,080</td>
+        <td class="td-green">$3,024</td>
+        <td>30.0%</td>
+        <td>$22.00</td>
+        <td>$11,088</td>
+        <td class="td-green">$4,032</td>
+        <td>36.4%</td>
+      </tr>
+      <tr>
+        <td>Kurobuta · Scott Miller · $720/head DTC · 340 lb planning wt</td>
+        <td>167</td>
+        <td class="td-gold">$6.54</td>
+        <td>$1,092</td>
+        <td>$10.00</td>
+        <td>$1,670</td>
+        <td class="td-green">$578</td>
+        <td class="td-green" style="font-weight:700;">34.6%</td>
+        <td>$11.00</td>
+        <td>$1,837</td>
+        <td class="td-green">$745</td>
+        <td class="td-green" style="font-weight:700;">40.6%</td>
+      </tr>
+      <tr>
+        <td>Heritage Pork · GOS Cross · $470/head DTC · 275 lb planning wt</td>
+        <td>135</td>
+        <td>$5.87</td>
+        <td>$792</td>
+        <td>$9.00</td>
+        <td>$1,215</td>
+        <td class="td-green">$423</td>
+        <td>34.8%</td>
+        <td>$10.00</td>
+        <td>$1,350</td>
+        <td class="td-green">$558</td>
+        <td>41.3%</td>
+      </tr>
+      <tr>
+        <td>Lamb</td>
+        <td>46</td>
+        <td>$12.00</td>
+        <td>$552</td>
+        <td>$15.00</td>
+        <td>$690</td>
+        <td class="td-green">$138</td>
+        <td>20.0%</td>
+        <td>$16.00</td>
+        <td>$736</td>
+        <td class="td-green">$184</td>
+        <td>25.0%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- MARGIN SUMMARY STRIP -->
+  <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--border); margin-top:16px;">
+    <div style="background:var(--cream); padding:14px 16px; text-align:center;">
+      <div style="font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Black Angus</div>
+      <div style="font-size:22px; font-weight:700; color:var(--charcoal); line-height:1;">16–23%</div>
+      <div style="font-size:9px; color:var(--muted); margin-top:3px;">$1,044–$1,566 / animal</div>
+    </div>
+    <div style="background:var(--cream); padding:14px 16px; text-align:center;">
+      <div style="font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">F1 Wagyu Cross</div>
+      <div style="font-size:22px; font-weight:700; color:var(--charcoal); line-height:1;">20–25%</div>
+      <div style="font-size:9px; color:var(--muted); margin-top:3px;">$1,512–$2,016 / animal</div>
+    </div>
+    <div style="background:var(--cream); padding:14px 16px; text-align:center;">
+      <div style="font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Full Blood Wagyu</div>
+      <div style="font-size:22px; font-weight:700; color:var(--gold); line-height:1;">30–36%</div>
+      <div style="font-size:9px; color:var(--muted); margin-top:3px;">$3,024–$4,032 / animal</div>
+    </div>
+    <div style="background:var(--cream); padding:14px 16px; text-align:center;">
+      <div style="font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Kurobuta</div>
+      <div style="font-size:22px; font-weight:700; color:var(--gold); line-height:1;">35–41%</div>
+      <div style="font-size:9px; color:var(--muted); margin-top:3px;">$578–$745 / animal</div>
+    </div>
+    <div style="background:var(--cream); padding:14px 16px; text-align:center;">
+      <div style="font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Heritage Pork</div>
+      <div style="font-size:22px; font-weight:700; color:var(--charcoal); line-height:1;">35–41%</div>
+      <div style="font-size:9px; color:var(--muted); margin-top:3px;">$423–$558 / animal</div>
+    </div>
+    <div style="background:var(--cream); padding:14px 16px; text-align:center;">
+      <div style="font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Lamb</div>
+      <div style="font-size:22px; font-weight:700; color:var(--charcoal); line-height:1;">20–25%</div>
+      <div style="font-size:9px; color:var(--muted); margin-top:3px;">$138–$184 / animal</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINDINGS -->
+<div class="findings-grid">
+  <div class="findings-box" style="background:var(--dark); color:var(--cream);">
+    <h4 style="color:var(--gold);">Key Findings — Whole/Half Market</h4>
+    <ul style="color:rgba(248,242,230,0.85); line-height:2.0; font-size:11.5px;">
+      <li>C7 is priced <strong style="color:var(--gold);">above market avg on 4 of 5 products</strong> — this is a premium brand</li>
+      <li>Black Angus: +20% above whole/half avg. Premium requires storytelling (prior comp to $12.63 retail avg was wrong — that included individual cuts)</li>
+      <li>F1 Cross: +7% above market. Most defensible — Chappell Hill at $14.73–16.41 brackets C7 squarely</li>
+      <li>Full Blood Wagyu: +11%. Wilders at $15 is the only lower-priced fullblood whole/half seller</li>
+      <li>Kurobuta: +11% above Kurobuta-labeled whole/half avg ($9 avg). Name change moves C7 from "+25% above generic Berkshire" to a defensible +11% within the Kurobuta peer set</li>
+      <li>Lamb: raised to $15 whole / $16 half — now <strong style="color:var(--gold);">−3% from market avg</strong>, essentially at market. Auction spread improved from +$0.19 to +$0.85/lb</li>
+    </ul>
+  </div>
+  <div class="findings-box" style="background:var(--cream); border:1px solid var(--border);">
+    <h4 style="color:var(--copper);">Action Items</h4>
+    <ul style="color:#555; line-height:2.0; font-size:11.5px;">
+      <li><strong>Lamb:</strong> Locked at $15 whole / $16 half. +$92/animal over prior pricing. At market mid — hold this price.</li>
+      <li><strong>Black Angus:</strong> +20% premium needs "why" on every product page — breed, feed, ranch, elevation.</li>
+      <li><strong>Kurobuta:</strong> Name change validates current $10/$11 pricing — no need to raise. "Kurobuta · 100% Full Blood Berkshire" in every headline. Individual cut channel ($14+/lb) is the next revenue lever.</li>
+      <li><strong>F1 Cross:</strong> Chappell Hill conversion data confirms $15 whole is well within market range — hold price.</li>
+      <li><strong>Full Blood Wagyu:</strong> Half at $22 ($5,544) is the strongest revenue per-half in the lineup — prioritize half sales.</li>
+      <li><strong>All:</strong> Shipping (~$0.50–1.00/lb average) adds to buyer's true cost — should appear in checkout estimates.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  <span>Circle 7 Beef · Canaan Mountain Meats · circle7meat.com</span>
+  <span>Whole &amp; Half Animal Comps Only · May 2026 · Colorado City AZ 86021 · CMM</span>
+</div>
+
+</body>
+</html>
