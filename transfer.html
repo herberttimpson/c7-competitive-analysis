@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circle 7 Beef — Project Transfer Document</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500&display=swap');
+
+  :root {
+    --gold: #C4952A;
+    --copper: #A0602A;
+    --charcoal: #B8B4B0;
+    --near-black: #1E1A16;
+    --charcoal-dark: #AEAAA6;
+    --cream: #F8F2E6;
+    --linen: #F2EAD8;
+    --sand: #DDD0B4;
+    --warm-brown: #8A7056;
+    --off-white: #FAFAF8;
+    --green: #2E7D32;
+    --red: #B71C1C;
+    --amber: #E65100;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--cream);
+    color: var(--near-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .doc-header {
+    background: var(--near-black);
+    color: var(--cream);
+    padding: 60px 80px 50px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .doc-header .eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .doc-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .doc-header .tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    color: var(--charcoal);
+    letter-spacing: 0.05em;
+    margin-bottom: 30px;
+  }
+  .doc-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184,180,176,0.2);
+  }
+  .doc-meta-item label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .doc-meta-item span {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: var(--cream);
+  }
+
+  /* TOC */
+  .toc-bar {
+    background: var(--charcoal-dark);
+    padding: 18px 80px;
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--sand);
+  }
+  .toc-bar a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--near-black);
+    text-decoration: none;
+    padding: 4px 16px 4px 0;
+    border-right: 1px solid rgba(30,26,22,0.2);
+    margin-right: 16px;
+    white-space: nowrap;
+  }
+  .toc-bar a:last-child { border-right: none; }
+  .toc-bar a:hover { color: var(--copper); }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--sand);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--near-black);
+  }
+
+  h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin: 28px 0 12px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p { margin-bottom: 12px; font-size: 15px; }
+  p:last-child { margin-bottom: 0; }
+
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  li { font-size: 15px; margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+
+  strong { font-weight: 600; color: var(--near-black); }
+
+  a { color: var(--copper); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* CARDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .card {
+    background: var(--off-white);
+    border: 1px solid var(--sand);
+    border-top: 3px solid var(--gold);
+    padding: 24px;
+    border-radius: 2px;
+  }
+  .card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-brown);
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 10px;
+  }
+  .card p { font-size: 14px; color: #4a4540; margin-bottom: 6px; }
+
+  /* STATUS BADGES */
+  .badge {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .badge-live { background: rgba(46,125,50,0.12); color: var(--green); border: 1px solid rgba(46,125,50,0.3); }
+  .badge-pending { background: rgba(230,81,0,0.1); color: var(--amber); border: 1px solid rgba(230,81,0,0.3); }
+  .badge-blocked { background: rgba(183,28,28,0.1); color: var(--red); border: 1px solid rgba(183,28,28,0.3); }
+  .badge-locked { background: rgba(196,149,42,0.12); color: var(--copper); border: 1px solid rgba(196,149,42,0.3); }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--off-white);
+  }
+  thead tr {
+    background: var(--near-black);
+    color: var(--cream);
+  }
+  thead th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--sand); }
+  tbody tr:hover { background: var(--linen); }
+  td { padding: 10px 14px; vertical-align: top; }
+  td:first-child { font-weight: 600; }
+  .num { text-align: right; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; }
+  .pos { color: var(--green); }
+  .row-highlight { background: rgba(196,149,42,0.06); }
+
+  /* KEY-VALUE PAIRS */
+  .kv-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    border: 1px solid var(--sand);
+    background: var(--off-white);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .kv-label {
+    background: var(--linen);
+    border-right: 1px solid var(--sand);
+    border-bottom: 1px solid var(--sand);
+    padding: 10px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-brown);
+    display: flex;
+    align-items: center;
+  }
+  .kv-value {
+    border-bottom: 1px solid var(--sand);
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  .kv-label:nth-last-child(2),
+  .kv-value:last-child {
+    border-bottom: none;
+  }
+
+  /* COLOR SWATCHES */
+  .color-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--off-white);
+    border: 1px solid var(--sand);
+    padding: 8px 12px;
+    border-radius: 2px;
+    min-width: 200px;
+  }
+  .swatch-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+  .swatch-info { font-size: 12px; }
+  .swatch-name { font-weight: 600; display: block; }
+  .swatch-hex { color: var(--warm-brown); font-family: monospace; }
+
+  /* BLOCKER CALLOUT */
+  .callout {
+    border-left: 4px solid var(--gold);
+    background: rgba(196,149,42,0.06);
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 2px 2px 0;
+  }
+  .callout.red { border-left-color: var(--red); background: rgba(183,28,28,0.04); }
+  .callout.green { border-left-color: var(--green); background: rgba(46,125,50,0.04); }
+  .callout-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 8px;
+  }
+  .callout.red .callout-title { color: var(--red); }
+  .callout.green .callout-title { color: var(--green); }
+
+  /* PHASE TRACKER */
+  .phase-list { list-style: none; padding: 0; }
+  .phase-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--sand);
+  }
+  .phase-item:last-child { border-bottom: none; }
+  .phase-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 32px;
+  }
+  .phase-body h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .phase-body p { font-size: 14px; margin-bottom: 4px; }
+
+  /* CONTACT CARDS */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .contact-card {
+    background: var(--off-white);
+    border: 1px solid var(--sand);
+    padding: 20px;
+  }
+  .contact-role {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .contact-name {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .contact-detail { font-size: 13px; color: #5a5550; margin-bottom: 4px; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(221,208,180,0.5);
+    font-size: 14px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .chk { font-size: 16px; flex-shrink: 0; }
+  .chk-done { color: var(--green); }
+  .chk-open { color: var(--amber); }
+  .chk-blocked { color: var(--red); }
+
+  /* PRINT */
+  @media print {
+    .toc-bar { display: none; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="eyebrow">Confidential — Internal Use Only</div>
+  <h1>Circle 7 Beef<br>Project Transfer</h1>
+  <div class="tagline">Real Meat. Ranch Direct. — Full Project State as of May 2026</div>
+  <div class="doc-meta">
+    <div class="doc-meta-item">
+      <label>Date</label>
+      <span>May 21, 2026</span>
+    </div>
+    <div class="doc-meta-item">
+      <label>Owner</label>
+      <span>Justin (Circle 7 Livestock, LLC)</span>
+    </div>
+    <div class="doc-meta-item">
+      <label>DTC Lead</label>
+      <span>Herbert Timpson + Joseph Timpson</span>
+    </div>
+    <div class="doc-meta-item">
+      <label>Website</label>
+      <span><a href="https://circle7meat.com" style="color:var(--gold)">circle7meat.com</a></span>
+    </div>
+    <div class="doc-meta-item">
+      <label>Status</label>
+      <span style="color:var(--gold)">Pre-Launch — August 2026 Target</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc-bar">
+  <a href="#overview">Overview</a>
+  <a href="#brand">Brand</a>
+  <a href="#website">Website</a>
+  <a href="#products">Products &amp; Pricing</a>
+  <a href="#coldchain">Cold Chain</a>
+  <a href="#platform">Platform</a>
+  <a href="#phases">Launch Phases</a>
+  <a href="#blockers">Blockers</a>
+  <a href="#contacts">Contacts</a>
+</div>
+
+<div class="container">
+
+  <!-- 01 OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title">Project Overview</div>
+    </div>
+
+    <p>Circle 7 Beef is going direct-to-consumer. The storefront lives at <strong>circle7meat.com</strong> — a custom-built HTML site on Cloudflare Pages. Commerce (checkout, payments, order management) runs on the <strong>From The Farm (FTF)</strong> platform at <strong>shop.circle7meat.com</strong>.</p>
+
+    <p>The business is owned by <strong>Justin</strong> (Circle 7 Livestock, LLC). Herbert and Joseph are not owners — they build and run the storefront, product catalog, and marketing backend.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">The Pitch</div>
+        <div class="card-title">Steakhouse quality. Ranch price.</div>
+        <p>"The quality your favorite steakhouse charges $90 for — raised on our ranch in Central Utah, shipped direct to your door."</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Target Launch</div>
+        <div class="card-title">August 15, 2026</div>
+        <p>Black Angus, Heritage Pork, Kurobuta, and Lamb available. F1 Wagyu Cross available March 2027. Full Blood Wagyu TBD.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Launch Products</div>
+        <div class="card-title">Halves &amp; Wholes Only</div>
+        <p>DTC launch is deposit-based whole animal shares. Individual cuts come after operations are running smoothly.</p>
+      </div>
+    </div>
+
+    <div class="kv-grid" style="margin-top:28px">
+      <div class="kv-label">Legal Entity</div>
+      <div class="kv-value">Circle 7 Livestock, LLC</div>
+      <div class="kv-label">SAM.gov UEI</div>
+      <div class="kv-value"><code>LE1HX82EVQX5</code> — Fully Active (Mar 2, 2026)</div>
+      <div class="kv-label">Domain</div>
+      <div class="kv-value">circle7meat.com (no S) — registered GoDaddy, DNS on Cloudflare</div>
+      <div class="kv-label">Ranch Location</div>
+      <div class="kv-value">Near Mt. Pleasant, Utah (animals raised here, processed at BarW Nephi)</div>
+      <div class="kv-label">Ship From</div>
+      <div class="kv-value"><strong>Colorado City, AZ 86021</strong> — ALL shipping originates here. Never use Mt. Pleasant as ship-from ZIP.</div>
+      <div class="kv-label">Processor</div>
+      <div class="kv-value">BarW, Nephi UT — Justin has existing relationship. Weekly schedule.</div>
+    </div>
+  </div>
+
+  <!-- 02 BRAND -->
+  <div class="section" id="brand">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title">Brand Identity <span class="badge badge-locked">Locked May 19, 2026</span></div>
+    </div>
+
+    <div class="kv-grid">
+      <div class="kv-label">Brand Name</div>
+      <div class="kv-value">Circle 7 Meats (not "Livestock, LLC")</div>
+      <div class="kv-label">Tagline</div>
+      <div class="kv-value">"Real Meat. Ranch Direct."</div>
+      <div class="kv-label">Hero Sub-Label</div>
+      <div class="kv-value">"Steakhouse Quality · Ranch Direct"</div>
+      <div class="kv-label">Positioning</div>
+      <div class="kv-value">Food-forward, NOT ranch-forward. Lean into the quality / price delta vs. restaurants.</div>
+      <div class="kv-label">Fonts</div>
+      <div class="kv-value">Headlines: Cormorant Garamond · UI/Labels: Barlow Condensed · Body: Barlow</div>
+    </div>
+
+    <h3>Color Palette — 13 Colors, No Pure Black</h3>
+    <div class="callout red">
+      <div class="callout-title">Important</div>
+      There is NO pure black (#000000) in this brand kit. <code>--black</code> is Charcoal Grey <code>#B8B4B0</code>. <code>--white</code> is Near Black <code>#1E1A16</code> — used for body text on charcoal backgrounds. This changed May 19, 2026.
+    </div>
+
+    <div class="color-grid">
+      <div class="swatch"><div class="swatch-dot" style="background:#C4952A"></div><div class="swatch-info"><span class="swatch-name">Gold</span><span class="swatch-hex">#C4952A — Primary CTAs</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#A0602A"></div><div class="swatch-info"><span class="swatch-name">Copper</span><span class="swatch-hex">#A0602A — Reserve tier, hovers</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#B8B4B0; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Charcoal Grey</span><span class="swatch-hex">#B8B4B0 — Main dark bg (--black)</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1E1A16"></div><div class="swatch-info"><span class="swatch-name">Near Black</span><span class="swatch-hex">#1E1A16 — Body text (--white)</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F8F2E6; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Cream</span><span class="swatch-hex">#F8F2E6 — Light sections</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F2EAD8; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Linen</span><span class="swatch-hex">#F2EAD8 — Featured cuts, CTA</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#DDD0B4; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Sand</span><span class="swatch-hex">#DDD0B4 — Borders (light sections)</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#FAFAF8; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Off White</span><span class="swatch-hex">#FAFAF8 — Cards, white surfaces</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#AEAAA6; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Charcoal Dark</span><span class="swatch-hex">#AEAAA6 — Secondary dark sections</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#B2AEAB; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Charcoal Panel</span><span class="swatch-hex">#B2AEAB — Inner cards</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#A8A4A0; border:1px solid #ccc"></div><div class="swatch-info"><span class="swatch-name">Charcoal Card</span><span class="swatch-hex">#A8A4A0 — Tier cards</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#D4A840"></div><div class="swatch-info"><span class="swatch-name">Gold Light</span><span class="swatch-hex">#D4A840 — Hover states on gold</span></div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#8A7056"></div><div class="swatch-info"><span class="swatch-name">Warm Brown</span><span class="swatch-hex">#8A7056 — Secondary text (light)</span></div></div>
+    </div>
+
+    <h3>Logo Files</h3>
+    <ul>
+      <li>Originals: <code>Desktop/Circle 7 - Canaan Mtn Meats/Image Assets/Brand Assets/circle7-logo-icon.png</code> + <code>circle7-logo-white.png</code></li>
+      <li>Web-ready: <code>C7_Site/img/logo-icon-nav.png</code>, <code>logo-icon-footer.png</code>, <code>logo-white-footer.png</code></li>
+      <li>Banner: <code>Desktop/Circle 7 - Canaan Mtn Meats/circle7_banner.jpg</code> (1500×500)</li>
+      <li>Full brand kit HTML: <code>Desktop/Circle 7 - Canaan Mtn Meats/C7_Brand_Kit.html</code></li>
+    </ul>
+  </div>
+
+  <!-- 03 WEBSITE -->
+  <div class="section" id="website">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title">Website &amp; Tech Stack</div>
+    </div>
+
+    <div class="kv-grid">
+      <div class="kv-label">Live URL</div>
+      <div class="kv-value"><a href="https://circle7meat.com">circle7meat.com</a> <span class="badge badge-live">Live</span></div>
+      <div class="kv-label">Host</div>
+      <div class="kv-value">Cloudflare Pages — Project: <code>circle7meat</code> | Subdomain: <code>circle7meat.pages.dev</code></div>
+      <div class="kv-label">CF Zone ID</div>
+      <div class="kv-value"><code>60d15731d934c7772c9808c4c079136b</code></div>
+      <div class="kv-label">CF Account ID</div>
+      <div class="kv-value"><code>8f61027521a0b28d86657493f845cf17</code></div>
+      <div class="kv-label">Site Files</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/C7_Site/</code></div>
+      <div class="kv-label">Deploy</div>
+      <div class="kv-value">Run <code>python3 deploy.py</code> from inside <code>C7_Site/</code></div>
+      <div class="kv-label">Homepage</div>
+      <div class="kv-value">V8 — dark atmosphere + cream decision zones. Dark = aspiration. Cream = trust/friction reduction at purchase.</div>
+      <div class="kv-label">Shop URL</div>
+      <div class="kv-value"><a href="https://shop.circle7meat.com">shop.circle7meat.com</a> — FTF commerce backend</div>
+    </div>
+
+    <h3>Shop DNS Setup</h3>
+    <div class="callout">
+      <div class="callout-title">Temporary Page Rule Active</div>
+      <code>shop.circle7meat.com/*</code> → 302 redirect → <code>https://fromthefarm.org/circle-7-meat</code><br><br>
+      This redirect stays until FTF banking is added AND one product published. After that, FTF provisions their SSL cert, the custom storefront loads natively, and the Page Rule gets deleted.
+    </div>
+
+    <div class="kv-grid">
+      <div class="kv-label">CNAME Record</div>
+      <div class="kv-value"><code>shop</code> → <code>storefront.fromthefarm.org</code> (Proxied: true)</div>
+      <div class="kv-label">Record ID</div>
+      <div class="kv-value"><code>56e7061ccead40809495102cb3bdbb2f</code></div>
+    </div>
+
+    <h3>Open Site Work</h3>
+    <ul class="checklist">
+      <li><span class="chk chk-open">○</span> Update all subpages (beef, lamb, pork, about, etc.) to V8 style — still on old orange Ranch Fire palette</li>
+      <li><span class="chk chk-open">○</span> Search Console verification</li>
+      <li><span class="chk chk-open">○</span> Add Joseph to Google Analytics</li>
+      <li><span class="chk chk-open">○</span> Wire Cloudflare API + GA API access for Joseph</li>
+      <li><span class="chk chk-open">○</span> Shares page — choose and build final layout (3 mockups in <code>shares-mockup.html</code>)</li>
+    </ul>
+
+    <h3>Domain Situation</h3>
+    <ul>
+      <li><strong>circle7meat.com</strong> — live, DNS on Cloudflare ✅</li>
+      <li><strong>circle7meats.com</strong> (with S) — registered 2020, inactive, privacy-protected via GoDaddy. Outreach sent Apr 17 via WHOIS. If owner responds: offer to buy, keep message low-pressure from Herbert's email (timpsonherbert@gmail.com).</li>
+    </ul>
+  </div>
+
+  <!-- 04 PRODUCTS & PRICING -->
+  <div class="section" id="products">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title">Products &amp; Pricing <span class="badge badge-locked">Locked May 20, 2026</span></div>
+    </div>
+
+    <h3>Yield Methodology — Always Use This</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Species</th><th>Live → HCW</th><th>HCW → Take-Home</th><th>Overall Yield</th></tr></thead>
+        <tbody>
+          <tr><td>Beef</td><td>60%</td><td>60%</td><td>36% of live weight</td></tr>
+          <tr><td>Pork</td><td>70%</td><td>70%</td><td>49% of live weight</td></tr>
+          <tr><td>Lamb</td><td>60%</td><td>55%</td><td>33% of live weight</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Processing Fees (BarW Nephi)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Species</th><th>Kill Fee</th><th>USDA Fee</th><th>Processing</th></tr></thead>
+        <tbody>
+          <tr><td>Beef</td><td>$150</td><td>$50</td><td>$1.10/lb HCW</td></tr>
+          <tr><td>Pork</td><td>$85</td><td>$25</td><td>$1.10/lb HCW</td></tr>
+          <tr><td>Lamb</td><td>$70</td><td>$0</td><td>$1.10/lb HCW</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Full Pricing Model</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Animal</th>
+            <th>Breed</th>
+            <th>Live lbs</th>
+            <th>HCW lbs</th>
+            <th>Take-Home (Whole)</th>
+            <th>Take-Home (Half)</th>
+            <th>Processing Total</th>
+            <th>$/lb Whole</th>
+            <th>$/lb Half</th>
+            <th>Revenue (Whole)</th>
+            <th>Revenue (2 Halves)</th>
+            <th>vs. Auction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Black Angus</td>
+            <td>Black Angus</td>
+            <td class="num">1,450</td>
+            <td class="num">870</td>
+            <td class="num">522 lbs</td>
+            <td class="num">261 lbs</td>
+            <td class="num">$1,157</td>
+            <td class="num">$12.00</td>
+            <td class="num">$13.00</td>
+            <td class="num">$6,264</td>
+            <td class="num">$6,786</td>
+            <td class="num pos">+$1.02/lb</td>
+          </tr>
+          <tr class="row-highlight">
+            <td>F1 Wagyu Cross</td>
+            <td>F1 Wagyu × Angus</td>
+            <td class="num">1,400</td>
+            <td class="num">840</td>
+            <td class="num">504 lbs</td>
+            <td class="num">252 lbs</td>
+            <td class="num">$1,124</td>
+            <td class="num">$15.00</td>
+            <td class="num">$16.00</td>
+            <td class="num">$7,560</td>
+            <td class="num">$8,064</td>
+            <td class="num pos">+$1.72/lb</td>
+          </tr>
+          <tr>
+            <td>Full Blood Wagyu</td>
+            <td>Full Blood Wagyu</td>
+            <td class="num">1,400</td>
+            <td class="num">840</td>
+            <td class="num">504 lbs</td>
+            <td class="num">252 lbs</td>
+            <td class="num">$1,124</td>
+            <td class="num">$20.00</td>
+            <td class="num">$22.00</td>
+            <td class="num">$10,080</td>
+            <td class="num">$11,088</td>
+            <td class="num pos">+$1.90/lb</td>
+          </tr>
+          <tr class="row-highlight">
+            <td>Kurobuta Pork</td>
+            <td>100% Full Blood Berkshire</td>
+            <td class="num">340</td>
+            <td class="num">238</td>
+            <td class="num">167 lbs</td>
+            <td class="num">84 lbs</td>
+            <td class="num">$372</td>
+            <td class="num">$10.00</td>
+            <td class="num">$11.00</td>
+            <td class="num">$1,670</td>
+            <td class="num">$1,837</td>
+            <td class="num pos">+$2.44/lb</td>
+          </tr>
+          <tr>
+            <td>Heritage Pork</td>
+            <td>GOS × Hampshire × Yorkshire</td>
+            <td class="num">275</td>
+            <td class="num">193</td>
+            <td class="num">135 lbs</td>
+            <td class="num">68 lbs</td>
+            <td class="num">$322</td>
+            <td class="num">$9.00</td>
+            <td class="num">$10.00</td>
+            <td class="num">$1,215</td>
+            <td class="num">$1,350</td>
+            <td class="num pos">+$1.87/lb</td>
+          </tr>
+          <tr class="row-highlight">
+            <td>Lamb</td>
+            <td>Rambouillet × Hampshire</td>
+            <td class="num">140</td>
+            <td class="num">84</td>
+            <td class="num">46 lbs</td>
+            <td class="num">23 lbs</td>
+            <td class="num">$162</td>
+            <td class="num">$15.00</td>
+            <td class="num">$16.00</td>
+            <td class="num">$690</td>
+            <td class="num">$736</td>
+            <td class="num pos">+$0.85/lb</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Sourcing — Keep Confidential</h3>
+    <div class="callout red">
+      <div class="callout-title">Do Not Mention Suppliers Publicly</div>
+      Do not name either pork supplier on the website, social media, or any public-facing content.
+    </div>
+    <ul>
+      <li><strong>Kurobuta (100% Full Blood Berkshire):</strong> Scott Miller — $650/pig @ 350 lbs live weight. C7 Livestock DTC cost = $720/head. ~30 head/month capacity. Planning weight: 340 lbs (conservative).</li>
+      <li><strong>Heritage Pork (GOS × Hampshire × Yorkshire):</strong> Supplier TBD — $400 at source, $470 C7 Livestock DTC cost. ~275–300 lbs live. Planning weight: 275 lbs.</li>
+    </ul>
+
+    <h3>Availability Timeline</h3>
+    <ul>
+      <li><strong>August 15, 2026:</strong> Black Angus, Heritage Pork, Kurobuta, Lamb</li>
+      <li><strong>March 15, 2027:</strong> F1 Wagyu Cross</li>
+      <li><strong>TBD:</strong> Full Blood Wagyu</li>
+    </ul>
+
+    <h3>Deposit Structure</h3>
+    <ul>
+      <li>25% deposit holds the animal at reservation</li>
+      <li>Balance due at ship or pickup</li>
+      <li>Deposit is the <strong>hero number</strong> on all marketing — full price is fine print</li>
+    </ul>
+  </div>
+
+  <!-- 05 COLD CHAIN -->
+  <div class="section" id="coldchain">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title">Cold Chain &amp; Packaging</div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-role">Foam + Box Kits</div>
+        <div class="contact-name">Colin Veres — EFP LLC</div>
+        <div class="contact-detail">📧 CVeres@efpcorp.com</div>
+        <div class="contact-detail">📞 615-864-1849</div>
+        <div class="contact-detail">efppackaging.com | La Vergne, TN</div>
+        <div class="contact-detail" style="margin-top:8px;font-weight:600">Quote Q2026-2653 (exp. May 30)</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-role">Gel Packs (Cryo Ice)</div>
+        <div class="contact-name">Jamie Wevley — Pelton Shepherd</div>
+        <div class="contact-detail">📧 jwevley@peltonshepherd.com</div>
+        <div class="contact-detail">📞 (402) 980-5935</div>
+        <div class="contact-detail">Ships from Stockton, CA</div>
+        <div class="contact-detail" style="margin-top:8px;font-size:12px">Note: Jamie introduced Herbert to Colin — they work as a team</div>
+      </div>
+    </div>
+
+    <h3>Box Pricing (Single-Pallet Min)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Box</th><th>Item #</th><th>Inner Dims</th><th>Wall</th><th>Price/Unit</th><th>Units/Pallet</th><th>1-Pallet Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Small</td><td>612125-WCP</td><td>12×10×10"</td><td>1.5"</td><td class="num">$9.85</td><td class="num">30</td><td class="num">$295.50</td></tr>
+          <tr><td>Large</td><td>625125-WCP</td><td>12×12×12"</td><td>2"</td><td class="num">$14.37</td><td class="num">54</td><td class="num">$776.58</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--warm-brown)">Shipping: COLLECT/LTL (Herbert pays freight). Payment: Net 30. Pricing improves at multi-pallet volume. Branding option available — send Circle 7 .EPS artwork to Colin for corrugated print quote.</p>
+
+    <h3>Gel Pack Sizing</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Box</th><th>Pack Size</th><th>Qty/Box</th><th>Cost/Box</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Small (12×10×10)</td><td>Cryo Ice 24oz</td><td>3 packs</td><td class="num">$1.74</td><td><span class="badge badge-live">Confirmed</span></td></tr>
+          <tr><td>Large (12×12×12)</td><td>Cryo Ice 32oz</td><td>4 packs</td><td class="num">$3.08</td><td><span class="badge badge-pending">Sample in Transit</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Total Per-Box Cost (Single-Pallet)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Box</th><th>EFP Kit</th><th>Gel Packs</th><th>Vac Bags + Labels</th><th>Pack Labor</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Small (~15 lbs)</td><td>$9.85</td><td>$1.74</td><td>$2.25</td><td>$8.00</td><td><strong>$21.84</strong></td></tr>
+          <tr><td>Large (~25 lbs)</td><td>$14.37</td><td>$3.08</td><td>$3.25</td><td>$12.00</td><td><strong>$32.70</strong></td></tr>
+          <tr class="row-highlight"><td>Weighted Avg (50/50)</td><td>$12.11</td><td>$2.41</td><td>$2.75</td><td>$10.00</td><td><strong>$27.27</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Fulfillment Infrastructure Needed</h3>
+    <ul class="checklist">
+      <li><span class="chk chk-open">○</span> Commercial deep chest freezer (-10°F to 0°F) — source used from FB Marketplace/restaurant liquidators SLC/Vegas</li>
+      <li><span class="chk chk-open">○</span> Clean storage space for boxes, liners, gel packs</li>
+      <li><span class="chk chk-open">○</span> Box + gel pack inventory (EFP + Pelton Shepherd)</li>
+      <li><span class="chk chk-open">○</span> Shipping zone plan (serviceable states, summer vs. winter)</li>
+      <li><span class="chk chk-open">○</span> Square for local pickup / farm gate POS</li>
+    </ul>
+  </div>
+
+  <!-- 06 PLATFORM -->
+  <div class="section" id="platform">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-title">Commerce Platform — FTF</div>
+    </div>
+
+    <div class="kv-grid">
+      <div class="kv-label">Platform</div>
+      <div class="kv-value">From The Farm (FTF) — Pro tier ($50/mo). NOT GrazeCart.</div>
+      <div class="kv-label">FTF Marketplace</div>
+      <div class="kv-value"><a href="https://fromthefarm.org/circle-7-meat">fromthefarm.org/circle-7-meat</a></div>
+      <div class="kv-label">Custom Storefront</div>
+      <div class="kv-value"><code>shop.circle7meat.com</code> — slug: <code>circle7meats</code></div>
+      <div class="kv-label">Storefront Settings</div>
+      <div class="kv-value"><code>farm.fromthefarm.org/settings/[farmId]/custom-storefront</code></div>
+      <div class="kv-label">Payments</div>
+      <div class="kv-value">Stripe (FTF standard)</div>
+    </div>
+
+    <div class="callout red">
+      <div class="callout-title">🔴 Blocker — Banking Not Added</div>
+      FTF will not provision the SSL certificate for the custom domain until banking is added in FTF Settings → Banking AND at least one product is published. Justin must add banking info. Once done: delete the Cloudflare Page Rule and the shop loads natively.
+    </div>
+  </div>
+
+  <!-- 07 LAUNCH PHASES -->
+  <div class="section" id="phases">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-title">Launch Phases</div>
+    </div>
+
+    <ul class="phase-list">
+      <li class="phase-item">
+        <div class="phase-num">1</div>
+        <div class="phase-body">
+          <h4>FTF Account + Domain <span class="badge badge-live">Mostly Done</span></h4>
+          <p>✅ FTF account exists. ✅ shop.circle7meat.com DNS wired. ✅ FTF Custom Storefront configured.</p>
+          <p>🔴 <strong>Blocker:</strong> Add banking in FTF Settings → Banking (Justin must do this). After banking + 1 product published → FTF provisions SSL → delete Page Rule.</p>
+        </div>
+      </li>
+      <li class="phase-item">
+        <div class="phase-num">2</div>
+        <div class="phase-body">
+          <h4>Store Profile + Brand <span class="badge badge-pending">Pending</span></h4>
+          <p>Upload logo + brand assets. Write farm story / About page copy. Store contact info, location, pickup options.</p>
+        </div>
+      </li>
+      <li class="phase-item">
+        <div class="phase-num">3</div>
+        <div class="phase-body">
+          <h4>Product Catalog <span class="badge badge-blocked">Needs Justin Pricing</span></h4>
+          <p>Product descriptions can be written now (no pricing needed). Pricing per cut is the blocker — Justin must provide.</p>
+          <p>Halves &amp; Wholes first. Individual cuts after operations are proven.</p>
+        </div>
+      </li>
+      <li class="phase-item">
+        <div class="phase-num">4</div>
+        <div class="phase-body">
+          <h4>Commerce Configuration <span class="badge badge-pending">Pending</span></h4>
+          <p>Stripe setup. Shipping zones + rates (gel pack math for UT + surrounding states). Deposit structure for shares (25%). Local pickup option.</p>
+        </div>
+      </li>
+      <li class="phase-item">
+        <div class="phase-num">5</div>
+        <div class="phase-body">
+          <h4>GHL + QA + Launch <span class="badge badge-pending">Pending</span></h4>
+          <p>Connect GHL CRM. Email automation (order confirmation → farm story → referral ask). Full end-to-end checkout test. Mobile review. DNS confirmed clean.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 08 BLOCKERS -->
+  <div class="section" id="blockers">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-title">Open Blockers</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Item</th><th>Who</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>FTF banking info</td><td>Justin</td><td><span class="badge badge-blocked">Blocked</span></td><td>Must add before shop.circle7meat.com goes live natively</td></tr>
+          <tr><td>Pricing per cut (individual)</td><td>Justin</td><td><span class="badge badge-blocked">Blocked</span></td><td>Needed for Phase 3 product catalog</td></tr>
+          <tr><td>Farm photos</td><td>Justin</td><td><span class="badge badge-blocked">Blocked</span></td><td>Ranch, animals, process photography</td></tr>
+          <tr><td>Stripe account</td><td>Justin</td><td><span class="badge badge-blocked">Blocked</span></td><td>Required for FTF checkout</td></tr>
+          <tr><td>EPS logo artwork</td><td>Herbert</td><td><span class="badge badge-pending">Pending</span></td><td>Send to Colin at EFP for branded box quote</td></tr>
+          <tr><td>32oz Cryo Ice test</td><td>Herbert</td><td><span class="badge badge-pending">Pending</span></td><td>Samples in transit from Jamie at Pelton Shepherd</td></tr>
+          <tr><td>Shares page layout</td><td>Herbert + Joseph</td><td><span class="badge badge-pending">Pending</span></td><td>3 mockups built in <code>shares-mockup.html</code> — choose one and build</td></tr>
+          <tr><td>Subpage V8 update</td><td>Joseph</td><td><span class="badge badge-pending">Pending</span></td><td>beef, lamb, pork, about, contact pages still on old palette</td></tr>
+          <tr><td>circle7meats.com acquisition</td><td>Herbert</td><td><span class="badge badge-pending">Pending</span></td><td>Outreach sent Apr 17. Waiting for owner response.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 09 CONTACTS -->
+  <div class="section" id="contacts">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div class="section-title">Key Contacts</div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-role">Owner — Circle 7</div>
+        <div class="contact-name">Justin</div>
+        <div class="contact-detail">Circle 7 Livestock, LLC</div>
+        <div class="contact-detail">Ranch near Mt. Pleasant, UT</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-role">DTC Lead</div>
+        <div class="contact-name">Herbert Timpson</div>
+        <div class="contact-detail">📧 timpsonherbert@gmail.com</div>
+        <div class="contact-detail">📍 Colorado City, AZ 86021</div>
+        <div class="contact-detail">📞 (435) 212-0136</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-role">Storefront + Marketing</div>
+        <div class="contact-name">Joseph Timpson</div>
+        <div class="contact-detail">GitHub: JTimpson23232</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-role">Box + Foam Kits</div>
+        <div class="contact-name">Colin Veres — EFP LLC</div>
+        <div class="contact-detail">📧 CVeres@efpcorp.com</div>
+        <div class="contact-detail">📞 615-864-1849</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-role">Gel Packs</div>
+        <div class="contact-name">Jamie Wevley — Pelton Shepherd</div>
+        <div class="contact-detail">📧 jwevley@peltonshepherd.com</div>
+        <div class="contact-detail">📞 (402) 980-5935</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-role">USDA Technical Assistance</div>
+        <div class="contact-name">Chris Roper — FlowerHill Institute</div>
+        <div class="contact-detail">Free resource. Loop in before any USDA grant submission.</div>
+        <div class="contact-detail">Working with Herbert since Jan 2026.</div>
+      </div>
+    </div>
+
+    <h3>File Locations (Herbert's Machine)</h3>
+    <div class="kv-grid">
+      <div class="kv-label">Main Folder</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/</code></div>
+      <div class="kv-label">Site Files</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/C7_Site/</code></div>
+      <div class="kv-label">Brand Kit</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/C7_Brand_Kit.html</code></div>
+      <div class="kv-label">Competitive Analysis</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/competitive-analysis.html</code> — also live at <a href="https://herberttimpson.github.io/c7-competitive-analysis/">herberttimpson.github.io/c7-competitive-analysis</a></div>
+      <div class="kv-label">EFP Box Quote</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/Q2026-2653 EFP Box Quote.pdf</code></div>
+      <div class="kv-label">Pelton Shepherd Pricing</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/Pelton Cryo Ice Pricing.png</code></div>
+      <div class="kv-label">5-Year Financial Model</div>
+      <div class="kv-value"><code>Desktop/Circle 7 - Canaan Mtn Meats/CMM_Circle7_5Year_Model_v5.xlsx</code></div>
+    </div>
+  </div>
+
+</div>
+
+<div style="background:var(--near-black);color:var(--charcoal);text-align:center;padding:24px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;border-top:3px solid var(--gold)">
+  Circle 7 Livestock, LLC — Confidential Transfer Document — Generated May 21, 2026
+</div>
+
+</body>
+</html>
